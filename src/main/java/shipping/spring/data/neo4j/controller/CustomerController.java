@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.jws.WebMethod;
+import javax.jws.WebResult.*;
+//import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -75,37 +80,22 @@ public class CustomerController {
 	@PostMapping(value="/saveGraphPost" , consumes = "application/json" , produces = "application/json")
 	public String createOrders(@RequestBody OrderRequest orderRequest) throws Exception {
 
+    		Address sourceAdd = orderRequest.getSourceAddress();
+    		Address destAdd = orderRequest.getDestinationAddress();
+			addressRepository.save(destAdd);
 
-		//MOCK DATA
-		Address address = new Address("streetName1", 1, "SanJose", 95134L);
+			Person keanu = new Person(orderRequest.getPersonName(), orderRequest.getPersonBorn());
+			personRepository.save(keanu);
+			sourceAdd.addPerson(keanu);
+			addressRepository.save(sourceAdd);
 
-		addressRepository.save(address);
+			Order orderDetails = new Order(orderRequest.getOrderNumber(), orderRequest.getOrderType());
+            orderRepository.save(orderDetails);
 
-		Person keanu = new Person("Keanu Reeves", 1964);
-		personRepository.save(keanu);
-		//personRepository.save(keanu);
-
-		//		Role neo = new Role(address, keanu);
-		//		neo.addRoleName("Neo");
-		//
-		//		keanu.addRole(neo);
-		//keanu.addAddress(address);
-		address.addPerson(keanu);
-
-
-		addressRepository.save(address);
-
-		Order orderDetails = new Order(1L, "Sports");
-		orderRepository.save(orderDetails);
-
-		Address srcAddr = new Address("streetNameSrc", 2, "SanJose", 95132L);
-		Address destAddr = new Address("streetNameDest", 3, "SanJose", 95134L);
-		orderDetails.addSourceAddress(srcAddr);
-		orderDetails.addDestinationAddress(destAddr);
-		orderDetails.addPerson(keanu);
-
-		orderRepository.save(orderDetails);
-		//MOCK DATA
+			orderDetails.addSourceAddress(sourceAdd);
+			orderDetails.addDestinationAddress(destAdd);
+			orderDetails.addPerson(keanu);
+			orderRepository.save(orderDetails);
 
 		return "Successfully created entities";
 	}

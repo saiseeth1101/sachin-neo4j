@@ -1,4 +1,4 @@
-Movies Example Application
+Shipping Services Example Application
 ==========================
 
 How to use Spring Boot, Spring Data, and Neo4j together.
