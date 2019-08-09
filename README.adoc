@@ -23,7 +23,27 @@ It is optimized for working with Neo4j Desktop and based on Neo4j's query langua
 . Run the project with `mvn spring-boot:run`.
 
 == Code Walkthrough
-There are Person, Order, Address repositories and their respecting POJO to handle the data and couple of APIS GET /savegraph(Testing purpose will create some entries for you) and POST /saveGraphPost which takes in object OrderRequest java object
+There are Person, Order, Address repositories and their respecting POJO to handle the data and couple of APIS GET /savegraph(Testing purpose will create some entries for you) and
+POST /saveGraphPost which takes in object OrderRequest java object
+Post Body:
+{
+  "orderNumber":1,
+  "orderType":"Sports",
+  "sourceAddress":{
+  	"zip":95134,
+  	"street":"1813 Canal Way",
+  	"city":"San Jose",
+  	"house":2
+  },
+   "destinationAddress":{
+  	"zip":95132,
+  	"street":"1814 Canal Way",
+  	"city":"San Jose",
+  	"house":4
+  },
+  "personName":"Sachin",
+  "personBorn":1992
+}
 
 .pom.xml
 [source,xml]
