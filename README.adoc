@@ -26,23 +26,24 @@ It is optimized for working with Neo4j Desktop and based on Neo4j's query langua
 There are Person, Order, Address repositories and their respecting POJO to handle the data and couple of APIS GET /savegraph(Testing purpose will create some entries for you) and
 POST /saveGraphPost which takes in object OrderRequest java object
 Post Body:
+
 {
   "orderNumber":1,
-  "orderType":"Sports",
+  "orderType":"SampleOrderType",
   "sourceAddress":{
-  	"zip":95134,
-  	"street":"1813 Canal Way",
-  	"city":"San Jose",
+  	"zip":12345,
+  	"street":"Sample Street",
+  	"city":"City",
   	"house":2
   },
    "destinationAddress":{
-  	"zip":95132,
-  	"street":"1814 Canal Way",
-  	"city":"San Jose",
+  	"zip":12346,
+  	"street":"Sample Street",
+  	"city":"City",
   	"house":4
   },
-  "personName":"Sachin",
-  "personBorn":1992
+  "personName":"Name",
+  "personBorn":2019
 }
 
 .pom.xml
