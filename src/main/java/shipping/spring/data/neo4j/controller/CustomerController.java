@@ -78,23 +78,29 @@ public class CustomerController {
 
 	@PostMapping(value="/saveGraphPost" , consumes = "application/json" , produces = "application/json")
 	public String createOrders(@RequestBody OrderRequest orderRequest) throws Exception {
+    	//Check if Order number exists, if it does throw exception otherwise allow oerson to create multiple orders
+		Iterable<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+        	if(order.getOrderNumber() == orderRequest.getOrderNumber()){
+        		throw new Exception("Order Number Exists");
+			}
+		}
+    	Address sourceAdd = orderRequest.getSourceAddress();
+		Address destAdd = orderRequest.getDestinationAddress();
+		addressRepository.save(destAdd);
 
-    		Address sourceAdd = orderRequest.getSourceAddress();
-    		Address destAdd = orderRequest.getDestinationAddress();
-			addressRepository.save(destAdd);
+		Person keanu = new Person(orderRequest.getPersonName(), orderRequest.getPersonBorn());
+		personRepository.save(keanu);
+		sourceAdd.addPerson(keanu);
+		addressRepository.save(sourceAdd);
 
-			Person keanu = new Person(orderRequest.getPersonName(), orderRequest.getPersonBorn());
-			personRepository.save(keanu);
-			sourceAdd.addPerson(keanu);
-			addressRepository.save(sourceAdd);
+		Order orderDetails = new Order(orderRequest.getOrderNumber(), orderRequest.getOrderType());
+		orderRepository.save(orderDetails);
 
-			Order orderDetails = new Order(orderRequest.getOrderNumber(), orderRequest.getOrderType());
-            orderRepository.save(orderDetails);
-
-			orderDetails.addSourceAddress(sourceAdd);
-			orderDetails.addDestinationAddress(destAdd);
-			orderDetails.addPerson(keanu);
-			orderRepository.save(orderDetails);
+		orderDetails.addSourceAddress(sourceAdd);
+		orderDetails.addDestinationAddress(destAdd);
+		orderDetails.addPerson(keanu);
+		orderRepository.save(orderDetails);
 
 		return "Successfully created entities";
 	}

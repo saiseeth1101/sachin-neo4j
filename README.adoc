@@ -24,7 +24,9 @@ It is optimized for working with Neo4j Desktop and based on Neo4j's query langua
 
 == Code Walkthrough
 There are Person, Order, Address repositories and their respecting POJO to handle the data and couple of APIS GET /savegraph(Testing purpose will create some entries for you) and
-POST /saveGraphPost which takes in object OrderRequest java object
+
+APIs Exposed:
+1.POST /saveGraphPost which takes in object OrderRequest java object and saves it if there is no existing orderNumber otherwise throws exception
 Post Body:
 
 {
@@ -45,6 +47,8 @@ Post Body:
   "personName":"Name",
   "personBorn":2019
 }
+
+2. /getOrders: Gets you the orders created
 
 .pom.xml
 [source,xml]
