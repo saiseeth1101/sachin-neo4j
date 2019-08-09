@@ -68,7 +68,6 @@ public class CustomerController {
     @GetMapping("/graph")
 	public Map<String, Object> graph(@RequestParam(value = "limit",required = false) Integer limit) {
 		return customerService.graph(limit == null ? 100 : limit);
-//		return new HashMap<String, Object>();
 	}
 
 
@@ -102,19 +101,13 @@ public class CustomerController {
 
 	@GetMapping(value="/savegraph")
 	public String createPurchases() {
+    	//MOCK data to test API call
 		Address address = new Address("streetName1", 1, "SanJose", 95134L);
 
 		addressRepository.save(address);
 
 		Person keanu = new Person("Keanu Reeves", 1964);
 		personRepository.save(keanu);
-		//personRepository.save(keanu);
-
-		//		Role neo = new Role(address, keanu);
-		//		neo.addRoleName("Neo");
-		//
-		//		keanu.addRole(neo);
-		//keanu.addAddress(address);
 		address.addPerson(keanu);
 
 
@@ -175,12 +168,10 @@ public class CustomerController {
 	@GetMapping("/graphAdd")
 	public Map<String, Object> graphAdd(@RequestParam(value = "limit",required = false) Integer limit) {
 		return customerService.graphAdd(limit == null ? 100 : limit);
-		//return new HashMap<String, Object>();
 	}
 
 	@GetMapping("/graphOrder")
 	public Map<String, Object> graphOrder(@RequestParam(value = "limit",required = false) Integer limit) {
 		return customerService.graphOrder(limit == null ? 100 : limit);
-		//		return new HashMap<String, Object>();
 	}
 }

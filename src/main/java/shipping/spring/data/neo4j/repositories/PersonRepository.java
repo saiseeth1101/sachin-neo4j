@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.Collection;
 
 /**
- * @author
+ * @author saiseeth
  * @author
  */
 @RepositoryRestResource(collectionResourceRel = "persons", path = "persons")
@@ -22,5 +22,9 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     @Query("MATCH (m:Person) RETURN m")
     //@Query("MATCH (m:Person)<-[r:LIVES_IN]-(a:Address) RETURN m,r,a LIMIT {limit}")
     Collection<Person> graph(@Param("limit") int limit);
+
+    @Query("MATCH (n) detach delete n")
+        //@Query("MATCH (m:Person)<-[r:LIVES_IN]-(a:Address) RETURN m,r,a LIMIT {limit}")
+    Collection<Person> graphClear(@Param("limit") int limit);
 
 }

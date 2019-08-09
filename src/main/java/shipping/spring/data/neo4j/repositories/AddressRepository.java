@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  * @author
- * @author
+ * @author saiseeth
  * @author
  */
 @RepositoryRestResource(collectionResourceRel = "addresses", path = "addresses")

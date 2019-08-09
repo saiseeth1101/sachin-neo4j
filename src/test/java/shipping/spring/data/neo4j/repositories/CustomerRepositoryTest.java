@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Collection;
 
+import org.junit.Assert;
 import shipping.spring.data.neo4j.domain.Address;
 import shipping.spring.data.neo4j.domain.Order;
 import shipping.spring.data.neo4j.domain.Person;
@@ -19,7 +20,7 @@ import shipping.spring.data.neo4j.repositories.OrderRepository;
 import shipping.spring.data.neo4j.repositories.PersonRepository;
 
 /**
- * @author pdtyreus
+ * @author saiseeth
  */
 
 @RunWith(SpringRunner.class)
@@ -38,53 +39,30 @@ public class CustomerRepositoryTest {
 
 	@Before
 	public void setUp() {
-//		Address address = new Address("streetName1", 1, "SanJose", 95134L);
-//
-//		addressRepository.save(address);
-//
-//		Person keanu = new Person("Keanu Reeves", 1964);
-//		personRepository.save(keanu);
-		//personRepository.save(keanu);
+		Person keanu = new Person("Keanu Reeves", 1964);
 
-//		Role neo = new Role(address, keanu);
-//		neo.addRoleName("Neo");
-//
-//		keanu.addRole(neo);
-		//keanu.addAddress(address);
-//		address.addPerson(keanu);
-//
-//		addressRepository.save(address);
-//
-//		//Order Details
-//
-//		Order orderDetails = new Order(1L, "Sports");
-//
-//		//orderRepository.save(orderDetails);
-//
-//		orderDetails.addSourceAddress(new Address("streetNameSrc", 2, "SanJose", 95132L));
-//		orderDetails.addDestinationAddress(new Address("streetNameDest", 3, "SanJose", 95134L));
-//		orderDetails.addPerson(keanu);
+		//Order Details
 
-		//orderRepository.save(orderDetails);
+		Order orderDetails = new Order(1L, "Sports");
+
+
+		orderDetails.addSourceAddress(new Address("streetNameSrc", 2, "SanJose", 95132L));
+		orderDetails.addDestinationAddress(new Address("streetNameDest", 3, "SanJose", 95134L));
+		orderDetails.addPerson(keanu);
+
+		orderRepository.save(orderDetails);
 	}
 
 	/**
-	 * Test of graph method, of class MovieRepository.
+	 * Test of graph method, of class OrderRepository.
 	 */
 	@Test
 	public void testGraph() {
-//		Collection<Person> graph = personRepository.graph(5);
-//		Collection<Address> graphAdd = addressRepository.graphAdd(5);
-//		Collection<Order> graphOrder = orderRepository.graphOrder(5);
 
-		//assertEquals(1, graph.size());
+		Collection<Order> graphOrder = orderRepository.graphOrder(1);
+		Order order = graphOrder.iterator().next();
+		Assert.assertEquals(order.getPerson().getName() ,("Keanu Reeves"));
+		Assert.assertEquals(order.getOrderType(),("Sports"));
 
-		//Person person = graph.iterator().next();
-		//Address address = graphAdd.iterator().next();
-
-		//assertEquals(1, person.getRoles().size());
-
-		//assertEquals("Keanu Reeves", person.getName());
-		//assertEquals("Keanu Reeves", movie.getRoles().iterator().next().getPerson().getName());
 	}
 }
