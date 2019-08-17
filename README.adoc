@@ -1,4 +1,10 @@
-Shipping Services Example Application
+*Shipping Services Example Application*
+
+Introduction:
+Exposes Two API's:
+1.POST /saveGraphPost:
+Details: Which takes in object OrderRequest object described below and saves it if there is no existing orderNumber records.
+2.GET /getOrders: Gets you the orders created
 ==========================
 
 How to use Spring Boot, Spring Data, and Neo4j together.
