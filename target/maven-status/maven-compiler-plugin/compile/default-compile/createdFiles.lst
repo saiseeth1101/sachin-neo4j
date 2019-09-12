@@ -1,0 +1,11 @@
+shipping/spring/data/neo4j/repositories/OrderRepository.class
+shipping/spring/data/neo4j/repositories/AddressRepository.class
+shipping/spring/data/neo4j/model/OrderRequest.class
+shipping/spring/data/neo4j/domain/Address.class
+shipping/spring/data/neo4j/domain/Order.class
+shipping/spring/data/neo4j/services/CustomerService.class
+shipping/spring/data/neo4j/repositories/PersonRepository.class
+shipping/spring/data/neo4j/controller/CustomerController.class
+shipping/spring/data/neo4j/domain/Person.class
+shipping/spring/data/neo4j/SampleCustomerApplication.class
+shipping/spring/data/neo4j/domain/Role.class
